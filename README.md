@@ -797,19 +797,6 @@ uploads/
 
 ---
 
-## 🗺 Roadmap
-
-- [ ] Course ratings & reviews
-- [ ] Real-time notifications (Socket.io)
-- [ ] Advanced admin analytics dashboard
-- [ ] Automated digital certificate generation (PDF)
-- [ ] Google OAuth login
-- [ ] Mobile application (React Native)
-- [ ] Live session scheduling
-- [ ] Student leaderboards and progress badges
-
----
-
 ## 🤝 Contributing
 
 Contributions are welcome!
