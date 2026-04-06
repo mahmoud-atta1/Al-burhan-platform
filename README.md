@@ -20,7 +20,6 @@ Structured curriculum tracks · video & PDF lessons · timed MCQ exams · enroll
 [![Joi](https://img.shields.io/badge/Joi-Validation-0080FF?style=flat-square)](https://joi.dev)
 [![Multer](https://img.shields.io/badge/Multer-Upload-FF6600?style=flat-square)](https://github.com/expressjs/multer)
 [![Sharp](https://img.shields.io/badge/Sharp-Image_Processing-99CC00?style=flat-square)](https://sharp.pixelplumbing.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-F5B800?style=flat-square)](LICENSE)
 
 <br />
 
