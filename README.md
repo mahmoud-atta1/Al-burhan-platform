@@ -8,7 +8,7 @@
 
 **A full-featured Arabic e-learning platform for Egyptian secondary school students.**
 <br />
-Structured curriculum tracks · video & PDF lessons · timed MCQ exams · enrollment management · admin control panel.
+Structured curriculum tracks · video & PDF lessons · timed MCQ exams · enrollment management · admin control panel
 
 <br />
 
