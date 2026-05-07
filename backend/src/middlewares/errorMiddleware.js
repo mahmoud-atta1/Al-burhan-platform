@@ -10,14 +10,6 @@ const globalError = (err, req, res, next) => {
     });
   }
 
-  if (statusCode >= 500) {
-    console.error(
-      `[${new Date().toISOString()}] InternalError: ${err.name || "Error"} | ${
-        err.message
-      }`,
-    );
-  }
-
   const safeMessage =
     err.isOperational && err.message
       ? err.message
