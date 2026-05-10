@@ -5,6 +5,10 @@ const Week = require("../models/week.model");
 const Question = require("../models/question.model");
 const ExamAttempt = require("../models/examAttempt.model");
 const ApiError = require("../utils/apiError");
+const {
+  calculateExamTotalMarks,
+  calculateExamsTotalMarks,
+} = require("../utils/examTotalMarks");
 
 const getWeekOrFail = async (weekId, next) => {
   const week = await Week.findById(weekId);
@@ -28,8 +32,12 @@ exports.createExam = asyncHandler(async (req, res, next) => {
     );
   }
 
+  const payload = { ...req.body };
+  delete payload.totalMarks;
+
   const exam = await Exam.create({
-    ...req.body,
+    ...payload,
+    totalMarks: 0,
     weekId: week._id,
     courseId: week.course,
   });
@@ -53,6 +61,27 @@ exports.getExams = asyncHandler(async (req, res) => {
 
   const exams = await Exam.find(filter).sort("-createdAt");
 
+  const totalsMap = await calculateExamsTotalMarks(exams.map((e) => e._id));
+  const updates = [];
+
+  for (const exam of exams) {
+    const computedTotal = totalsMap.get(exam._id.toString()) ?? 0;
+
+    if (exam.totalMarks !== computedTotal) {
+      exam.totalMarks = computedTotal;
+      updates.push({
+        updateOne: {
+          filter: { _id: exam._id },
+          update: { $set: { totalMarks: computedTotal } },
+        },
+      });
+    }
+  }
+
+  if (updates.length) {
+    await Exam.bulkWrite(updates);
+  }
+
   res.status(200).json({
     success: true,
     results: exams.length,
@@ -67,6 +96,16 @@ exports.getExam = asyncHandler(async (req, res, next) => {
     return next(new ApiError("الامتحان غير موجود", 404));
   }
 
+  const computedTotal = await calculateExamTotalMarks(exam._id);
+
+  if (exam.totalMarks !== computedTotal) {
+    exam.totalMarks = computedTotal;
+    await Exam.updateOne(
+      { _id: exam._id },
+      { $set: { totalMarks: computedTotal } },
+    );
+  }
+
   res.status(200).json({
     success: true,
     data: exam,
@@ -76,6 +115,7 @@ exports.getExam = asyncHandler(async (req, res, next) => {
 exports.updateExam = asyncHandler(async (req, res, next) => {
   delete req.body.weekId;
   delete req.body.courseId;
+  delete req.body.totalMarks;
 
   const exam = await Exam.findOne({
     _id: req.params.id,
@@ -101,6 +141,16 @@ exports.updateExam = asyncHandler(async (req, res, next) => {
     new: true,
     runValidators: true,
   });
+
+  const computedTotal = await calculateExamTotalMarks(updatedExam._id);
+
+  if (updatedExam.totalMarks !== computedTotal) {
+    updatedExam.totalMarks = computedTotal;
+    await Exam.updateOne(
+      { _id: updatedExam._id },
+      { $set: { totalMarks: computedTotal } },
+    );
+  }
 
   res.status(200).json({
     success: true,

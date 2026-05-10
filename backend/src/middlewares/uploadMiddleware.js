@@ -23,6 +23,11 @@ const upload = multer({
 
 exports.uploadSingle = (fieldName) => upload.single(fieldName);
 
+const ensureUploadDirectory = (folder) => {
+  const dirPath = path.join(process.cwd(), "uploads", folder);
+  fs.mkdirSync(dirPath, { recursive: true });
+};
+
 exports.resizeImage = (
   folder,
   width = 800,
@@ -31,11 +36,14 @@ exports.resizeImage = (
 ) => {
   return async (req, res, next) => {
     try {
+      req.body = req.body || {};
+
       if (!req.file || !req.file.mimetype.startsWith("image")) {
         return next();
       }
 
       const filename = `${folder}-${Date.now()}.jpeg`;
+      ensureUploadDirectory(folder);
       const filePath = path.join(process.cwd(), "uploads", folder, filename);
 
       await sharp(req.file.buffer)
@@ -55,11 +63,14 @@ exports.resizeImage = (
 exports.processLessonPDF = (folder = "lessons") => {
   return async (req, res, next) => {
     try {
+      req.body = req.body || {};
+
       if (!req.file || req.file.mimetype !== "application/pdf") {
         return next();
       }
 
       const filename = `lesson-${Date.now()}.pdf`;
+      ensureUploadDirectory(folder);
       const filePath = path.join(process.cwd(), "uploads", folder, filename);
 
       fs.writeFileSync(filePath, req.file.buffer);

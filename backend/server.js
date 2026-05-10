@@ -24,16 +24,16 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: {
-    status: "fail",
-    message:
-      "Too many requests from this IP, please try again after 15 minutes",
-  },
-});
-app.use("/api", limiter);
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 100,
+//   message: {
+//     status: "fail",
+//     message:
+//       "Too many requests from this IP, please try again after 15 minutes",
+//   },
+// });
+// //app.use("/api", limiter);
 
 mountRoutes(app);
 

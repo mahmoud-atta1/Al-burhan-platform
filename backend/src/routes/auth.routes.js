@@ -20,14 +20,14 @@ const {
   protect,
 } = require("../services/auth.service");
 
-const loginLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 5,
-  message: {
-    status: "fail",
-    message: "Too many login attempts, please try again after 15 minutes",
-  },
-});
+// const loginLimiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 5,
+//   message: {
+//     status: "fail",
+//     message: "Too many login attempts, please try again after 15 minutes",
+//   },
+// });
 
 const emailLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
@@ -39,7 +39,7 @@ const emailLimiter = rateLimit({
 });
 
 router.post("/signup", signupValidator, signup);
-router.post("/login", loginLimiter, loginValidator, login);
+router.post("/login", loginValidator, login);
 router.post("/logout", protect, logout);
 
 router.post(

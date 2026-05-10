@@ -34,7 +34,7 @@ const setCourseIdToBody = (req, res, next) => {
   next();
 };
 
-router.get("/:weekId/content", protect, requireActiveEnrollment, getWeekContent);
+router.get("/:weekId/content", getWeekContent);
 
 router.get("/", getWeeksValidator, getWeeks);
 router.get("/:id", getWeekValidator, getWeek);

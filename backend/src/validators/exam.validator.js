@@ -52,11 +52,14 @@ const createExamSchema = Joi.object({
     "any.required": "المدة مطلوبة",
   }),
 
-  totalMarks: Joi.number().min(1).required().messages({
-    "number.base": "إجمالي الدرجات يجب أن يكون رقم",
-    "number.min": "إجمالي الدرجات يجب أن يكون 1 على الأقل",
-    "any.required": "إجمالي الدرجات مطلوب",
-  }),
+  totalMarks: Joi.alternatives().try(
+    Joi.number().min(0).messages({
+      "number.base": "إجمالي الدرجات يجب أن يكون رقم",
+      "number.min": "إجمالي الدرجات لا يمكن أن يكون أقل من 0",
+    }),
+    Joi.string().trim().valid(""),
+    Joi.valid(null),
+  ),
 
   availableFrom: Joi.date().iso().messages({
     "date.format": "وقت بداية الامتحان غير صالح",
@@ -89,10 +92,14 @@ const updateExamSchema = Joi.object({
     "number.min": "المدة يجب أن تكون 1 على الأقل",
   }),
 
-  totalMarks: Joi.number().min(1).messages({
-    "number.base": "إجمالي الدرجات يجب أن يكون رقم",
-    "number.min": "إجمالي الدرجات يجب أن يكون 1 على الأقل",
-  }),
+  totalMarks: Joi.alternatives().try(
+    Joi.number().min(0).messages({
+      "number.base": "إجمالي الدرجات يجب أن يكون رقم",
+      "number.min": "إجمالي الدرجات لا يمكن أن يكون أقل من 0",
+    }),
+    Joi.string().trim().valid(""),
+    Joi.valid(null),
+  ),
 
   availableFrom: Joi.date().iso().messages({
     "date.format": "وقت بداية الامتحان غير صالح",

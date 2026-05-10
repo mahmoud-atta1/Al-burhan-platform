@@ -13,13 +13,6 @@ const weekSchema = new mongoose.Schema(
       ref: "Course",
       required: true,
     },
-
-    order: {
-      type: Number,
-      required: true,
-      min: 1,
-    },
-
     description: {
       type: String,
     },
@@ -32,7 +25,7 @@ const weekSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-weekSchema.index({ course: 1, order: 1 }, { unique: true });
+
 
 weekSchema.pre(/^find/, function () {
   this.find({ active: true });

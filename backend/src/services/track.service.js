@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Track = require("../models/track.model");
+const Course = require("../models/course.model");
 const ApiError = require("../utils/apiError");
 
 exports.createTrack = asyncHandler(async (req, res, next) => {
@@ -54,6 +55,8 @@ exports.deleteTrack = asyncHandler(async (req, res, next) => {
   );
 
   if (!track) return next(new ApiError("المسار غير موجود", 404));
+
+  await Course.updateMany({ track: track._id }, { active: false });
 
   res.status(200).json({
     success: true,

@@ -21,6 +21,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
     filter.fullName = { $regex: keyword, $options: "i" };
   }
 
+  const nemberOfUsers = await User.countDocuments();
   const countDocuments = await User.countDocuments(filter);
   const apiFeatures = new ApiFeatures(User.find(filter), req.query).paginate(
     countDocuments,
@@ -35,6 +36,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
   res.status(200).json({
     success: true,
     results: users.length,
+    nemberOfAllUsers:nemberOfUsers,
     pagination: paginationResult,
     data: users,
   });

@@ -48,7 +48,7 @@ exports.getWeeks = asyncHandler(async (req, res, next) => {
     filter.course = course._id;
   }
 
-  const weeks = await Week.find(filter).sort("order");
+  const weeks = await Week.find(filter);
   res.status(200).json({ success: true, results: weeks.length, data: weeks });
 });
 

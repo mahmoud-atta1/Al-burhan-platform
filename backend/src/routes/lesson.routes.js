@@ -24,7 +24,9 @@ const {
 } = require("../middlewares/uploadMiddleware");
 
 const { protect, allowedTo } = require("../services/auth.service");
-const { requireActiveEnrollment } = require("../middlewares/enrollment.middleware");
+const {
+  requireActiveEnrollment,
+} = require("../middlewares/enrollment.middleware");
 
 const setWeekIdToBody = (req, res, next) => {
   if (!req.body.weekId && req.params.weekId) {
@@ -33,24 +35,21 @@ const setWeekIdToBody = (req, res, next) => {
   next();
 };
 
-router.use(protect);
-
 router.get(
   "/",
-  allowedTo("admin", "student"),
-  requireActiveEnrollment,
   getWeekLessonsValidator,
   getWeekLessons,
 );
 router.get(
   "/:id",
+  protect,
   allowedTo("admin", "student"),
   requireActiveEnrollment,
   getLessonValidator,
   getLesson,
 );
 
-router.use(allowedTo("admin"));
+router.use(protect, allowedTo("admin"));
 
 router.post(
   "/",

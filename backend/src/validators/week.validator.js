@@ -29,12 +29,6 @@ const createWeekSchema = Joi.object({
     "any.required": "عنوان الأسبوع حقل إلزامي",
   }),
 
-  order: Joi.number().integer().min(1).required().messages({
-    "number.base": "الترتيب يجب أن يكون رقمًا",
-    "number.integer": "الترتيب يجب أن يكون رقمًا صحيحًا",
-    "any.required": "ترتيب الأسبوع مطلوب",
-  }),
-
   description: Joi.string().allow(""),
 
   course: Joi.string().hex().length(24).messages({
@@ -46,7 +40,6 @@ const createWeekSchema = Joi.object({
 
 const updateWeekSchema = Joi.object({
   title: Joi.string().trim().min(2).max(200),
-  order: Joi.number().integer().min(1),
   description: Joi.string().allow(""),
   active: Joi.boolean(),
 })

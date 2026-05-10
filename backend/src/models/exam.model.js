@@ -28,8 +28,8 @@ const examSchema = new mongoose.Schema(
 
     totalMarks: {
       type: Number,
-      required: true,
-      min: 1,
+      default: 0,
+      min: 0,
     },
 
     availableFrom: {

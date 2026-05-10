@@ -35,9 +35,10 @@ exports.requestEnrollment = asyncHandler(async (req, res, next) => {
   const course = await getCourseOrFail(courseId, next);
   if (!course) return;
 
+  req.body = req.body || {};
   const isPaidCourse = course.price > 0;
   const uploadedPaymentScreenshot = isPaidCourse
-    ? req.body.paymentScreenshot
+    ? req.body?.paymentScreenshot
     : null;
   const requestedStatus = isPaidCourse ? "pending" : "active";
   const existing = await Enrollment.findOne({
@@ -202,7 +203,7 @@ exports.cancelEnrollment = asyncHandler(async (req, res, next) => {
 });
 
 exports.manualAssignEnrollment = asyncHandler(async (req, res, next) => {
-  const { studentId, courseId } = req.body;
+  const { studentId, courseId } = req.body || {};
 
   const student = await getStudentOrFail(studentId, next);
   if (!student) return;

@@ -4,6 +4,7 @@ const Question = require("../models/question.model");
 const Exam = require("../models/exam.model");
 const ExamAttempt = require("../models/examAttempt.model");
 const ApiError = require("../utils/apiError");
+const { syncExamTotalMarks } = require("../utils/examTotalMarks");
 
 const getExamOrFail = async (examId) => {
   const exam = await Exam.findById(examId);
@@ -51,6 +52,8 @@ exports.createQuestion = asyncHandler(async (req, res, next) => {
     ...req.body,
     examId: exam._id,
   });
+
+  await syncExamTotalMarks(exam._id);
 
   res.status(201).json({
     success: true,
@@ -149,6 +152,8 @@ exports.updateQuestion = asyncHandler(async (req, res, next) => {
     runValidators: true,
   });
 
+  await syncExamTotalMarks(updated.examId);
+
   res.status(200).json({
     success: true,
     data: updated,
@@ -161,6 +166,8 @@ exports.deleteQuestion = asyncHandler(async (req, res, next) => {
   if (!question) {
     return next(new ApiError("السؤال غير موجود", 404));
   }
+
+  await syncExamTotalMarks(question.examId);
 
   res.status(200).json({
     success: true,
