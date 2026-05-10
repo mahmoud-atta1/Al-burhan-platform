@@ -44,6 +44,7 @@ exports.signup = asyncHandler(async (req, res, next) => {
   newUser.password = undefined;
   res.status(201).json({
     status: "success",
+    token,
     data: newUser,
   });
 });
@@ -70,6 +71,7 @@ exports.login = asyncHandler(async (req, res, next) => {
   user.password = undefined;
   res.status(200).json({
     status: "success",
+    token,
     data: user,
   });
 });

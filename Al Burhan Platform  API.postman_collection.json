@@ -1,0 +1,2108 @@
+{
+  "info": {
+    "_postman_id": "2fa5240f-3636-4d94-ada7-e0d24f35f683",
+    "name": "Al Burhan Platform  API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51642188",
+    "_collection_link": "https://go.postman.co/collection/51642188-2fa5240f-3636-4d94-ada7-e0d24f35f683?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\"fullName\":\"student3\",\r\n\"email\":\"student@example.com\",\r\n\"phone\":\"01120000000\",\r\n\"parentPhone\":\"01000000001\",\r\n\"governorate\":\"Cairo\",\r\n\"password\":\"123456\",\r\n\"passwordConfirm\":\"123456\",\r\n\"gender\":\"male\",\r\n\"educationLevel\":\"first_secondary\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/signup",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"admin@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login (Phone)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"phone\":\"01120000000\",\r\n    \"password\":\"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"student3@example.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/forgot-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "forgot-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Reset Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"resetCode\":\"{{resetCode}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/verify-reset-code",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "verify-reset-code"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"ahmed@example.com\",\r\n    \"newPassword\":\"123456\",\r\n    \"newPasswordConfirm\":\"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/reset-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Me",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"fullName\":\"Ahmed Ali Updated\",\r\n    \"email\":\"ahmed2@example.com\",\r\n    \"governorate\":\"Giza\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/update-me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "update-me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change My Password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"currentPassword\":\"123456\",\r\n    \"newPassword\":\"1234567\",\r\n    \"passwordConfirm\":\"1234567\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/change-my-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "change-my-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Me",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/delete-me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "delete-me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "educationLevel",
+                  "value": "second_secondary",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "keyword",
+                  "value": "one",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "phone",
+                  "value": "01128845254",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": null,
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": null,
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"active\":false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "{{userId}}",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change User Password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"newPassword\":\"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}/password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "{{userId}}",
+                "password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tracks",
+      "item": [
+        {
+          "name": "List Tracks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/tracks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tracks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Track",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "General Biology",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Foundation track",
+                  "type": "text"
+                },
+                {
+                  "key": "educationLevel",
+                  "value": "2nd_secondary",
+                  "type": "text"
+                },
+                {
+                  "key": "coverImage",
+                  "type": "file",
+                  "src": "postman-cloud:///1f1001d0-59cc-4dd0-a989-cf558946d4f3"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/tracks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tracks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Track",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/tracks/{{trackId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tracks",
+                "{{trackId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Track",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "General Biology (Updated)",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Updated description",
+                  "type": "text"
+                },
+                {
+                  "key": "educationLevel",
+                  "value": "2nd_secondary",
+                  "type": "text"
+                },
+                {
+                  "key": "active",
+                  "value": "true",
+                  "type": "text"
+                },
+                {
+                  "key": "coverImage",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/tracks/{{trackId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tracks",
+                "{{trackId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Track",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/tracks/{{trackId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tracks",
+                "{{trackId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Courses",
+      "item": [
+        {
+          "name": "List Courses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/courses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "courses"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Courses By Track",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/tracks/{{trackId}}/courses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tracks",
+                "{{trackId}}",
+                "courses"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Course (By Track)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Biology Basics",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Intro course",
+                  "type": "text"
+                },
+                {
+                  "key": "price",
+                  "value": "0",
+                  "type": "text"
+                },
+                {
+                  "key": "durationInWeeks",
+                  "value": "6",
+                  "type": "text"
+                },
+                {
+                  "key": "isPublished",
+                  "value": "true",
+                  "type": "text"
+                },
+                {
+                  "key": "coverImage",
+                  "type": "file",
+                  "src": "postman-cloud:///1f1001d0-59cc-4dd0-a989-cf558946d4f3"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/tracks/{{trackId}}/courses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tracks",
+                "{{trackId}}",
+                "courses"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Course",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/courses/{{courseId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "courses",
+                "{{courseId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Course",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Biology Basics Updated",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Intro course (updated)",
+                  "type": "text"
+                },
+                {
+                  "key": "price",
+                  "value": "0",
+                  "type": "text"
+                },
+                {
+                  "key": "track",
+                  "value": "{{trackId}}",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "durationInWeeks",
+                  "value": "6",
+                  "type": "text"
+                },
+                {
+                  "key": "isPublished",
+                  "value": "true",
+                  "type": "text"
+                },
+                {
+                  "key": "active",
+                  "value": "true",
+                  "type": "text"
+                },
+                {
+                  "key": "coverImage",
+                  "type": "file",
+                  "src": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/courses/{{courseId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "courses",
+                "{{courseId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Course",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/courses/{{courseId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "courses",
+                "{{courseId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Weeks",
+      "item": [
+        {
+          "name": "List Weeks By Course",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/courses/{{courseId}}/weeks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "courses",
+                "{{courseId}}",
+                "weeks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Week (By Course)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\":\"Week 1\",\r\n    \"order\":2,\r\n    \"description\":\"Intro week\",\r\n    \"active\":true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/courses/{{courseId}}/weeks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "courses",
+                "{{courseId}}",
+                "weeks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Week",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/weeks/{{weekId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "weeks",
+                "{{weekId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Week Content",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/weeks/{{weekId}}/content",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "weeks",
+                "{{weekId}}",
+                "content"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Week",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\":\"Week 1 (Updated)\",\r\n    \"order\":1,\r\n    \"description\":\"Updated intro week\",\r\n    \"active\":true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/weeks/{{weekId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "weeks",
+                "{{weekId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Week",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/weeks/{{weekId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "weeks",
+                "{{weekId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Weeks (Global)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/weeks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "weeks"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Lessons",
+      "item": [
+        {
+          "name": "List Lessons By Week",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/weeks/{{weekId}}/lessons",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "weeks",
+                "{{weekId}}",
+                "lessons"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Lesson",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "شرح المصوفه",
+                  "type": "text",
+                  "uuid": "bbcf61c5-de1c-4a03-8e08-1b731b0069bd"
+                },
+                {
+                  "key": "description",
+                  "value": "وصف الحصة",
+                  "type": "text"
+                },
+                {
+                  "key": "type",
+                  "value": "video",
+                  "type": "text",
+                  "uuid": "ca98e08b-6ba4-4b1c-940e-94ca2f0c5c37"
+                },
+                {
+                  "key": "contentUrl",
+                  "type": "text",
+                  "uuid": "e991446e-84e7-4013-a484-73c026d7334a",
+                  "value": "https://www.youtube.com/watch?v=NeLjLW_1IF0"
+                },
+                {
+                  "key": "order",
+                  "value": "2",
+                  "type": "text",
+                  "uuid": "55403503-7c28-4404-a094-0f0831261e31"
+                },
+                {
+                  "key": "isFree",
+                  "value": "false",
+                  "type": "text"
+                },
+                {
+                  "key": "isPublished",
+                  "value": "true",
+                  "type": "text"
+                },
+                {
+                  "key": "pdfFile",
+                  "type": "file",
+                  "src": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/weeks/{{weekId}}/lessons",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "weeks",
+                "{{weekId}}",
+                "lessons"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Lesson",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/weeks/{{weekId}}/lessons/{{lessonId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "weeks",
+                "{{weekId}}",
+                "lessons",
+                "{{lessonId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Lesson",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "type": "text",
+                  "uuid": "f1fc73e1-8916-4d80-a1ea-40a1582726f7",
+                  "value": "update"
+                },
+                {
+                  "key": "description",
+                  "value": "وصف (updated)",
+                  "type": "text"
+                },
+                {
+                  "key": "type",
+                  "value": "video",
+                  "type": "text"
+                },
+                {
+                  "key": "contentUrl",
+                  "value": "https://www.youtube.com/watch?v=NeLjLW_1IF0",
+                  "type": "text"
+                },
+                {
+                  "key": "order",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "isFree",
+                  "value": "false",
+                  "type": "text"
+                },
+                {
+                  "key": "isPublished",
+                  "value": "true",
+                  "type": "text"
+                },
+                {
+                  "key": "pdfFile",
+                  "type": "file",
+                  "src": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/weeks/{{weekId}}/lessons/{{lessonId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "weeks",
+                "{{weekId}}",
+                "lessons",
+                "{{lessonId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Lesson",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/weeks/{{weekId}}/lessons/{{lessonId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "weeks",
+                "{{weekId}}",
+                "lessons",
+                "{{lessonId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Exams",
+      "item": [
+        {
+          "name": "List Exams By Week",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/weeks/{{weekId}}/exams",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "weeks",
+                "{{weekId}}",
+                "exams"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Exams By course",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/courses/{{courseId}}/exams",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "courses",
+                "{{courseId}}",
+                "exams"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Exam (By Week)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\":\"Week 2 Exam\",\r\n    \"duration\":20,\r\n    \"totalMarks\":\"\",\r\n    \"availableFrom\":\"2026-04-12T10:00:00.000Z\",\r\n    \"availableUntil\":\"2026-04-12T12:00:00.000Z\",\r\n    \"isPublished\":true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/weeks/{{weekId}}/exams",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "weeks",
+                "{{weekId}}",
+                "exams"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Exam",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams/{{examId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams",
+                "{{examId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Exam",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\":\"Week 1 Exam Updated\",\r\n    \"duration\":20,\r\n    \"totalMarks\":\"\",\r\n    \"availableFrom\":\"2026-04-12T10:00:00.000Z\",\r\n    \"availableUntil\":\"2026-04-12T12:00:00.000Z\",\r\n    \"isPublished\":true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams/{{examId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams",
+                "{{examId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Exam",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams/{{examId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams",
+                "{{examId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Exams (Global)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Questions",
+      "item": [
+        {
+          "name": "List Questions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams/{{examId}}/questions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams",
+                "{{examId}}",
+                "questions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Question",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams/{{examId}}/questions/{{questionId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams",
+                "{{examId}}",
+                "questions",
+                "{{questionId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Question",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \r\n   \"questionText\":\"What is biology\",\r\n   \"options\":[\r\n    {\"text\":\"Study of life\",\"isCorrect\":true},\r\n    {\"text\":\"Study of rocks\",\"isCorrect\":false},\r\n    {\"text\":\"Study of stars\",\"isCorrect\":false},\r\n    {\"text\":\"Study of clouds\",\"isCorrect\":false} ],\r\n    \"mark\":5\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams/{{examId}}/questions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams",
+                "{{examId}}",
+                "questions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Question",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"questionText\":\"What is biology (updated)?\",\r\n  \"options\":[\r\n    {\"text\":\"Study of life\",\"isCorrect\":true},\r\n    {\"text\":\"Study of rocks\",\"isCorrect\":false},\r\n    {\"text\":\"Study of stars\",\"isCorrect\":false},\r\n    {\"text\":\"Study of clouds\",\"isCorrect\":false}\r\n  ],\r\n  \"mark\":5\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams/{{examId}}/questions/{{questionId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams",
+                "{{examId}}",
+                "questions",
+                "{{questionId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Question",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams/{{examId}}/questions/{{questionId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams",
+                "{{examId}}",
+                "questions",
+                "{{questionId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Exam Attempts",
+      "item": [
+        {
+          "name": "Submit Attempt",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"answers\": [\n    {\n      \"questionId\": \"{{questionId}}\",\n      \"selectedOption\": 0\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams/{{examId}}/attempts/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams",
+                "{{examId}}",
+                "attempts",
+                "submit"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "My Attempt",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams/{{examId}}/attempts/my",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams",
+                "{{examId}}",
+                "attempts",
+                "my"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Admin - List Attempts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams/{{examId}}/attempts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams",
+                "{{examId}}",
+                "attempts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Start Attempt",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/exams/{{examId}}/attempts/start",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exams",
+                "{{examId}}",
+                "attempts",
+                "start"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Enrollments",
+      "item": [
+        {
+          "name": "Request Enrollment (Student)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "paymentScreenshot",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/enrollments/courses/{{courseId}}/request",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "enrollments",
+                "courses",
+                "{{courseId}}",
+                "request"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "My Enrollments (Student)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{studentToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/enrollments/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "enrollments",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Enrollments (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/enrollments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "enrollments"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "pending",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "studentId",
+                  "value": "{{userId}}",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "courseId",
+                  "value": "{{courseId}}",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Manual Assign Enrollment (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{userId}}\",\n  \"courseId\": \"{{courseId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/enrollments/manual-assign",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "enrollments",
+                "manual-assign"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Approve Enrollment (Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/enrollments/{{enrollmentId}}/approve",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "enrollments",
+                "{{enrollmentId}}",
+                "approve"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Enrollment (Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/enrollments/{{enrollmentId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "enrollments",
+                "{{enrollmentId}}",
+                "cancel"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "adminToken",
+      "value": "<ADMIN_TOKEN>"
+    },
+    {
+      "key": "studentToken",
+      "value": "<STUDENT_TOKEN>"
+    },
+    {
+      "key": "trackId",
+      "value": "<TRACK_ID>"
+    },
+    {
+      "key": "courseId",
+      "value": "<COURSE_ID>"
+    },
+    {
+      "key": "weekId",
+      "value": "<WEEK_ID>"
+    },
+    {
+      "key": "lessonId",
+      "value": "<LESSON_ID>"
+    },
+    {
+      "key": "examId",
+      "value": "<EXAM_ID>"
+    },
+    {
+      "key": "questionId",
+      "value": "<QUESTION_ID>"
+    },
+    {
+      "key": "userId",
+      "value": "<USER_ID>"
+    },
+    {
+      "key": "enrollmentId",
+      "value": "<ENROLLMENT_ID>"
+    },
+    {
+      "key": "resetCode",
+      "value": "<RESET_CODE>"
+    }
+  ]
+}
