@@ -71,7 +71,7 @@ const calculateAttemptScore = (questions, answers) => {
   return score;
 };
 
-const serializeAttempt = (attempt) => {
+const serializeAttempt = (attempt, exam) => {
   const remainingSeconds =
     attempt.status === "in_progress" && attempt.expiresAt
       ? Math.max(
@@ -82,6 +82,7 @@ const serializeAttempt = (attempt) => {
 
   return {
     ...attempt.toObject(),
+    examTotalMarks: exam?.totalMarks ?? 0,
     remainingSeconds,
   };
 };
@@ -110,7 +111,7 @@ exports.startExamAttempt = asyncHandler(async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "المحاولة الحالية ما زالت نشطة",
-      data: serializeAttempt(attempt),
+      data: serializeAttempt(attempt, exam),
     });
   }
 
@@ -135,7 +136,7 @@ exports.startExamAttempt = asyncHandler(async (req, res) => {
 
   res.status(201).json({
     success: true,
-    data: serializeAttempt(attempt),
+    data: serializeAttempt(attempt, exam),
   });
 });
 
@@ -172,12 +173,12 @@ exports.submitExamAttempt = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     success: true,
-    data: serializeAttempt(attempt),
+    data: serializeAttempt(attempt, exam),
   });
 });
 
 exports.getMyExamAttempt = asyncHandler(async (req, res) => {
-  await getExamOrFail(req.params.examId);
+  const exam = await getExamOrFail(req.params.examId);
 
   let attempt = await ExamAttempt.findOne({
     studentId: req.user._id,
@@ -192,12 +193,12 @@ exports.getMyExamAttempt = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     success: true,
-    data: serializeAttempt(attempt),
+    data: serializeAttempt(attempt, exam),
   });
 });
 
 exports.getExamAttempts = asyncHandler(async (req, res) => {
-  await getExamOrFail(req.params.examId);
+  const exam = await getExamOrFail(req.params.examId);
 
   const attempts = await ExamAttempt.find({
     examId: req.params.examId,
@@ -206,6 +207,7 @@ exports.getExamAttempts = asyncHandler(async (req, res) => {
   res.status(200).json({
     success: true,
     results: attempts.length,
+    examTotalMarks: exam.totalMarks ?? 0,
     data: attempts,
   });
 });
