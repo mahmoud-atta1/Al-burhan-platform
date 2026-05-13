@@ -71,6 +71,67 @@ const calculateAttemptScore = (questions, answers) => {
   return score;
 };
 
+const buildAttemptReview = (questions, answers) => {
+  const answersMap = new Map(
+    (answers ?? []).map((answer) => [
+      String(answer.questionId),
+      answer.selectedOption,
+    ]),
+  );
+
+  const incorrectQuestions = [];
+  let unansweredCount = 0;
+
+  for (const question of questions) {
+    const questionId = String(question._id);
+
+    const hasAnswer = answersMap.has(questionId);
+    if (!hasAnswer) unansweredCount += 1;
+
+    const selectedOption = hasAnswer ? answersMap.get(questionId) : null;
+    const selectedOptionIsValid =
+      typeof selectedOption === "number" &&
+      selectedOption >= 0 &&
+      selectedOption < (question.options?.length ?? 0);
+
+    const studentAnswerText = selectedOptionIsValid
+      ? question.options[selectedOption].text
+      : null;
+
+    const correctOptions = (question.options ?? [])
+      .map((option, index) =>
+        option.isCorrect ? { index, text: option.text } : null,
+      )
+      .filter(Boolean);
+
+    const isCorrect =
+      selectedOptionIsValid && question.options[selectedOption].isCorrect;
+
+    if (isCorrect) continue;
+
+    incorrectQuestions.push({
+      questionId,
+      questionText: question.questionText,
+      mark: question.mark,
+      studentAnswer: {
+        selectedOption: selectedOptionIsValid ? selectedOption : null,
+        text: studentAnswerText,
+      },
+      correctAnswer: {
+        option: correctOptions[0] ?? null,
+        options: correctOptions,
+      },
+    });
+  }
+
+  return {
+    incorrectQuestions,
+    incorrectCount: incorrectQuestions.length,
+    unansweredCount,
+    totalQuestions: questions.length,
+  };
+};
+
 const serializeAttempt = (attempt, exam) => {
   const remainingSeconds =
     attempt.status === "in_progress" && attempt.expiresAt
@@ -89,12 +150,6 @@ const serializeAttempt = (attempt, exam) => {
 
 exports.startExamAttempt = asyncHandler(async (req, res) => {
   const exam = await getExamOrFail(req.params.examId);
-  ensureExamIsOpenNow(exam);
-
-  const questionsCount = await Question.countDocuments({ examId: exam._id });
-  if (!questionsCount) {
-    throw new ApiError("لا يمكن بدء الامتحان قبل إضافة الأسئلة", 400);
-  }
 
   let attempt = await ExamAttempt.findOne({
     studentId: req.user._id,
@@ -105,7 +160,15 @@ exports.startExamAttempt = asyncHandler(async (req, res) => {
     attempt = await syncExpiredAttempt(attempt);
 
     if (attempt.status !== "in_progress") {
-      throw new ApiError("تم حل الامتحان بالفعل", 400);
+      const questions = await Question.find({ examId: exam._id });
+      const attemptData = serializeAttempt(attempt, exam);
+      attemptData.review = buildAttemptReview(questions, attempt.answers);
+
+      return res.status(200).json({
+        success: true,
+        message: "تم إنهاء هذه المحاولة بالفعل",
+        data: attemptData,
+      });
     }
 
     return res.status(200).json({
@@ -113,6 +176,13 @@ exports.startExamAttempt = asyncHandler(async (req, res) => {
       message: "المحاولة الحالية ما زالت نشطة",
       data: serializeAttempt(attempt, exam),
     });
+  }
+
+  ensureExamIsOpenNow(exam);
+
+  const questionsCount = await Question.countDocuments({ examId: exam._id });
+  if (!questionsCount) {
+    throw new ApiError("لا يمكن بدء الامتحان قبل إضافة الأسئلة", 400);
   }
 
   const startedAt = new Date();
@@ -171,9 +241,12 @@ exports.submitExamAttempt = asyncHandler(async (req, res) => {
   attempt.submittedAt = new Date();
   await attempt.save();
 
+  const attemptData = serializeAttempt(attempt, exam);
+  attemptData.review = buildAttemptReview(questions, attempt.answers);
+
   res.status(200).json({
     success: true,
-    data: serializeAttempt(attempt, exam),
+    data: attemptData,
   });
 });
 
@@ -191,9 +264,16 @@ exports.getMyExamAttempt = asyncHandler(async (req, res) => {
 
   attempt = await syncExpiredAttempt(attempt);
 
+  const attemptData = serializeAttempt(attempt, exam);
+
+  if (attempt.status !== "in_progress") {
+    const questions = await Question.find({ examId: exam._id });
+    attemptData.review = buildAttemptReview(questions, attempt.answers);
+  }
+
   res.status(200).json({
     success: true,
-    data: serializeAttempt(attempt, exam),
+    data: attemptData,
   });
 });
 
