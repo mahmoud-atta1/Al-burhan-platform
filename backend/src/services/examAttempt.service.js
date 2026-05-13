@@ -80,13 +80,32 @@ const buildAttemptReview = (questions, answers) => {
   );
 
   const incorrectQuestions = [];
+  const unansweredQuestions = [];
   let unansweredCount = 0;
 
   for (const question of questions) {
     const questionId = String(question._id);
 
+    const correctOptions = (question.options ?? [])
+      .map((option, index) =>
+        option.isCorrect ? { index, text: option.text } : null,
+      )
+      .filter(Boolean);
+
     const hasAnswer = answersMap.has(questionId);
-    if (!hasAnswer) unansweredCount += 1;
+    if (!hasAnswer) {
+      unansweredCount += 1;
+      unansweredQuestions.push({
+        questionId,
+        questionText: question.questionText,
+        mark: question.mark,
+        correctAnswer: {
+          option: correctOptions[0] ?? null,
+          options: correctOptions,
+        },
+      });
+      continue;
+    }
 
     const selectedOption = hasAnswer ? answersMap.get(questionId) : null;
     const selectedOptionIsValid =
@@ -97,12 +116,6 @@ const buildAttemptReview = (questions, answers) => {
     const studentAnswerText = selectedOptionIsValid
       ? question.options[selectedOption].text
       : null;
-
-    const correctOptions = (question.options ?? [])
-      .map((option, index) =>
-        option.isCorrect ? { index, text: option.text } : null,
-      )
-      .filter(Boolean);
 
     const isCorrect =
       selectedOptionIsValid && question.options[selectedOption].isCorrect;
@@ -128,6 +141,7 @@ const buildAttemptReview = (questions, answers) => {
     incorrectQuestions,
     incorrectCount: incorrectQuestions.length,
     unansweredCount,
+    unansweredQuestions,
     totalQuestions: questions.length,
   };
 };
