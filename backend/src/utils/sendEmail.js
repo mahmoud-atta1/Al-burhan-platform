@@ -1,6 +1,6 @@
-const nodemailer = require("nodemailer");
-
 const sendEmail = async (options) => {
+  console.log("1");
+
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -9,6 +9,8 @@ const sendEmail = async (options) => {
     },
   });
 
+  console.log("2");
+
   const mailOpts = {
     from: `منصة البرهان التعليمية <${process.env.EMAIL_USER}>`,
     to: options.email,
@@ -16,7 +18,9 @@ const sendEmail = async (options) => {
     text: options.message,
   };
 
-  await transporter.sendMail(mailOpts);
-};
+  console.log("3");
 
-module.exports = sendEmail;
+  await transporter.sendMail(mailOpts);
+
+  console.log("4");
+};
