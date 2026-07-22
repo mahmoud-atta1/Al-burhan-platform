@@ -240,7 +240,7 @@ Authorization: Bearer <JWT>
 <summary><strong>POST /login — Body & Response</strong></summary>
 
 ```json
-{ "phone": "01012345678", "password": "secret123" }
+{ "phone": "01012345678", "password": "seret123" }
 // OR
 { "email": "ahmed@example.com", "password": "secret123" }
 ```
